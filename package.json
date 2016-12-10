@@ -2,6 +2,7 @@
   "name": "foodnetwork",
   "version": "0.0.0",
   "private": true,
+  "main": "app.js",
   "scripts": {
     "start": "nodemon ./bin/www"
   },
@@ -11,6 +12,9 @@
     "debug": "~2.2.0",
     "ejs": "~2.5.2",
     "express": "~4.14.0",
+    "express-ejs-layouts": "^2.2.0",
+    "method-override": "^2.3.7",
+    "mongoose": "^4.7.2",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
   }
