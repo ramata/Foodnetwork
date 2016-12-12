@@ -7,10 +7,17 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var expressLayouts = require('express-ejs-layouts');
+var passport = require('passport');
+var session = require('express-session');
+var flash = require('connect-flash');
+
+mongoose.Promise = require('bluebird');
 
 
+//Routes
 var index = require('./routes/home');
 var users = require('./routes/posts');
+var comments = require('./routes/comments');
 
 var app = express();
 
@@ -22,20 +29,33 @@ mongoose.connect('mongodb://localhost/todos');
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
+app.use(logger('combined'));
 app.use(express.static(__dirname+'/public'));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 // Routes
 app.use('/', require('./routes/home'));
 app.use('/posts', require('./routes/posts'));
+app.use('/comments', comments);
 
-// Port setting
-app.listen(3000, function() {
-  console.log('server connected');
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+// This middleware will allow us to use the currentUser in our views and routes.
+app.use(function (req, res, next) {
+  global.currentUser = req.user;
+  next();
 });
 
+app.use('/', index);
+app.use('/users', users);
+app.use('/comments', comments);
+// let passportConfigFunction = require('./config/passport/passport');
+// passportConfigFunction(passport);
 
 
 

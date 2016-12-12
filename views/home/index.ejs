@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body class="container-fluid">
+  <header>
+
+  </header>
+
+  <main>
+    <div>
+      <h3>Comments:</h3>
+      <% comments.forEach(function(comment) { %>
+        <h4>
+          <form method="POST" action="/comments/<%= comment._id %>?_method=DELETE">
+            <a href="/comments/<%= comment._id %>">
+              <%= comment.title %>
+            </a>
+            <a href="/comments/<%= comment._id %>/toggle">
+              <% if (comment.completed) { %>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+              <% } else { %>
+                <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+              <% } %>
+            </a>
+            <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+          </form>
+        </h4>
+      <% }) %>
+    </div>
+    <a href="/comments/new" class="btn btn-primary">New</a>
+  </main>
+
+
+</body>
+</html>
