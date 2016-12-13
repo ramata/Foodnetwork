@@ -7,13 +7,13 @@
 <body class="container-fluid">
   <% include ../partials/nav %>
 <header>
-
+  <% include ../partials/header %>
 </header>
 
 <main>
    <div>
        <h2>Sign up</h2>
-       <form method="post" action="/sign-up">
+       <form method="post" action="/signup">
            <div class="form-group">
                <label for="email">Email</label>
                <input class="form-control" type="text" name="email" id="email">
@@ -21,7 +21,7 @@
 
            <div class="form-group">
                <label for="email">Password</label>
-               <input class="form-control" type="password" name="password" id="password"> <!--HIDES THE PASSWORD-->
+               <input class="form-control" type="password" name="password" id="password">
            </div>
 
            <input class="btn btn-default" type="submit">

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var mongoose= require('mongoose');
 
 var Comment = require('../models/comment');
 
@@ -21,11 +22,28 @@ function authenticate(req, res, next) {
 
 // INDEX
 router.get('/', authenticate, function(req, res, next) {
+  console.log('comments index');
   // get all the comments and render the index view
 
-   var comments = global.currentUser.comments;
-   res.render('comments/home', { comments: comments, message: req.flash() });
- });
+});
+
+// router.get('home/recipes', function(req, res){
+//   Comment.find({}, function(err, allRecipes) {
+//     if (err) {
+//       return next(err);
+//     } else {
+//       res.render('home/recipes', {recipes: allRecipes})
+//     }
+//   });
+// });
+
+// router.get('./form', authenticate, function(req, res, next) {
+//   res.render('posts/form');
+// });
+
+// var comments = global.currentUser.comments;
+// res.render('home/', { comments: comments, message: req.flash() });
+
 
 // NEW
 router.get('/new',  authenticate, function(req, res, next) {
@@ -33,23 +51,23 @@ router.get('/new',  authenticate, function(req, res, next) {
     title: '',
     completed: false
   };
-  res.render('comments/new', { comment: comment } );
+  res.render('posts/new', { comment: comment, message: req.flash() });
 });
 
 // SHOW
 router.get('/:id', authenticate, function(req, res, next) {
-//   Comment.findById(req.params.id)
-//   .then(function(comment) {
-//     if (!comment) return next(makeError(res, 'Document not found', 404));
-//     res.render('home/show', { comment: comment });
-//   }, function(err) {
-//     return next(err);
-//   });
-// });
-var comment = currentUser.comments.id(req.params.id);
-  if (!comment) return next(makeError(res, 'Document not found', 404));
-  res.render('comments/show', { comment: comment, message: req.flash() } );
+  // Comment.findById(req.params.id)
+  // .then(function(comment) {
+  //   if (!comment) return next(makeError(res, 'Document not found', 404));
+  //   res.render('home/show', { comment: comment });
+  // }, function(err) {
+  //   return next(err);
+  // });
 });
+
+// var comment = currentUser.comments.id(req.params.id);
+  // if (!comment) return next(makeError(res, 'Document not found', 404));
+  // res.render('posts/show', { comment: comment, message: req.flash() } );
 
 // CREATE
 router.post('/', authenticate, function(req, res, next) {
@@ -73,7 +91,7 @@ router.post('/', authenticate, function(req, res, next) {
 router.get('/:id/edit', authenticate, function(req, res, next) {
   var comment = currentUser.comments.id(req.params.id);
   if (!comment) return next(makeError(res, 'Document not found', 404));
-  res.render('comments/edit', { comment: comment, message: req.flash() } );
+  res.render('posts/edit', { comment: comment, message: req.flash() } );
 });
 
 // UPDATE
