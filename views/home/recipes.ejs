@@ -21,15 +21,11 @@
                 <article class="recipe">
                     <h2>Chef's pick: Christmas dinner</h2>
                     <ul>
-                        <li onclick="location.href = 'https://goo.gl/tJhTmV';">
-                          Chefs’ Picks tracks down what the pros are eating and cooking from coast to coast.</li>
-                        <li onclick="location.href = 'https://goo.gl/XMmv38';">
-                          Known as the Feast of the Seven Fishes, this tradition-steeped meal draws
-                          family members together to enjoy a multitude of courses while they await
-                          the impending arrival of Christmas. The meal typically entails quite a few
-                          different kinds of fish prepared
-                          in a variety of ways: alone, in pasta, as an appetizer or even as a stew.</li>
-
+                      <% recipes.forEach(function(recipe) { %>
+                        <li><a href="<%= recipe.url %>" target="_blank"><%= recipe.title %></a>
+                          <a class="btn btn-primary" href="/comments/new">Add a Comment</a>
+                        </li>
+                      <% }); %>
                     </ul>
                 </article>
             </div>

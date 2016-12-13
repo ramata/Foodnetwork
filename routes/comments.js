@@ -51,7 +51,7 @@ router.get('/new',  authenticate, function(req, res, next) {
     title: '',
     completed: false
   };
-  res.render('posts/new', { comment: comment, message: req.flash() });
+  res.render('comments/new', { comment: comment, message: req.flash() });
 });
 
 // SHOW
@@ -72,19 +72,13 @@ router.get('/:id', authenticate, function(req, res, next) {
 // CREATE
 router.post('/', authenticate, function(req, res, next) {
   var comment = new Comment({
-    title:     req.body.title,
-    completed: req.body.completed ? true : false
+    text: req.body.text,
+    user: req.user
   });
-  // Since a user's comments are an embedded document, we just need to push a new
-  // Comment to the user's list of comments and save the user.
-  currentUser.comments.push(comment);
-  currentUser.save()
-  .then(function() {
-    res.redirect('/comments');
-  }, function(err) {
-    return next(err);
+  Comment.create(comment)
+  .then(function(saved) {
+    res.redirect('/recipes');
   });
-
 });
 
 // EDIT
