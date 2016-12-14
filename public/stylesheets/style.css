@@ -34,3 +34,6 @@ li {
   height: 200px;   /* used to force all recipes to have the same height */
   margin: 10px;
 }
+#myNavbar {
+  font-size: 20px;
+}

@@ -65,9 +65,6 @@ router.get('/:id', authenticate, function(req, res, next) {
   // });
 });
 
-// var comment = currentUser.comments.id(req.params.id);
-  // if (!comment) return next(makeError(res, 'Document not found', 404));
-  // res.render('posts/show', { comment: comment, message: req.flash() } );
 
 // CREATE
 router.post('/', authenticate, function(req, res, next) {
