@@ -37,3 +37,14 @@ li {
 #myNavbar {
   font-size: 20px;
 }
+.video {
+text-align: center;
+}
+.homepics {
+  text-align: center;
+}
+.picture {
+  border: 2px solid black;
+  margin: 4px;
+
+}
