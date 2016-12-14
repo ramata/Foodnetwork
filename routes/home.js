@@ -14,7 +14,7 @@ router.get('/recipes', function(req, res) {
   let recipes = [
     { title: "Recipe 1", url: "https://goo.gl/tJhTmV" },
     { title: "Recipe 2", url: "https://goo.gl/XMmv38" },
-    { title: "Recipe 3", url: "https://goo.gl/XMmv38" }
+    { title: "Recipe 3", url: "https://goo.gl/GLQfd1" },
   ];
   res.render('home/recipes', { recipes: recipes, message: req.flash() });
 });

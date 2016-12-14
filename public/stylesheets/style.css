@@ -9,7 +9,8 @@ a {
 }
 
 .jumbotron h1{
-  color: green;
+  color: purple;
+  text-align: center;
 }
 h2 {
   color: white;
