@@ -74,7 +74,7 @@ router.post('/', authenticate, function(req, res, next) {
   });
   Comment.create(comment)
   .then(function(saved) {
-    res.redirect('/recipes');
+    res.redirect('/reviews');
   });
 });
 
@@ -129,5 +129,6 @@ router.get('/:id/toggle', authenticate, function(req, res, next) {
     });
   }
 });
+
 
 module.exports = router;

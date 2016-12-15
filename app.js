@@ -11,6 +11,9 @@ var passport = require('passport');
 var session = require('express-session');
 var flash = require('connect-flash');
 
+
+
+
 mongoose.Promise = require('bluebird');
 
 
@@ -19,25 +22,26 @@ var index = require('./routes/home');
 var users = require('./routes/users');
 var comments = require('./routes/comments');
 
+
 var app = express();
 
 
 // Connect to database
-// mongoose.connect('mongodb://localhost/recipes');
-if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI);
-}
-else {
-  mongoose.connect('mongodb://localhost/recipes');
-}
-mongoose.connection.on('error', function(err) {
-  console.error('MongoDB connection error: ' + err);
-  process.exit(-1);
-  }
-);
-mongoose.connection.once('open', function() {
-  console.log("Mongoose has connected to MongoDB!");
-});
+mongoose.connect('mongodb://localhost/recipes');
+// if (process.env.MONGODB_URI) {
+//   mongoose.connect(process.env.MONGODB_URI);
+// }
+// else {
+//   mongoose.connect('mongodb://localhost/recipes');
+// }
+// mongoose.connection.on('error', function(err) {
+//   console.error('MongoDB connection error: ' + err);
+//   process.exit(-1);
+//   }
+// );
+// mongoose.connection.once('open', function() {
+//   console.log("Mongoose has connected to MongoDB!");
+// });
 
  // view engine setup
 app.set('views', './views');
@@ -71,6 +75,8 @@ app.use(function (req, res, next) {
 app.use('/', index);
 app.use('/users', users);
 app.use('/comments', comments);
+
+
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

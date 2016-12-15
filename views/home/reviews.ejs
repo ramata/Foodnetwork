@@ -15,6 +15,12 @@
       <h3>Post your reviews of your favorite chefs or recipes here</h3>
 
   </main>
+  <ul>
+    <% comments.reverse().forEach(function(comment) { %>
+      <li><p class ="comment"><%= comment.user ? comment.user.local.email : 'NA' %> - :<%= comment.text %></p>
+      </li>
+    <% }); %>
+  </ul>
 
 
 

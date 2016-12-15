@@ -1,6 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var Comment = require('../models/comment');
+
+function authenticate(req, res, next) {
+  if(!req.isAuthenticated()) {
+    req.flash('error', 'Please signup or login.');
+    res.redirect('/login');
+  }
+  else {
+    next();
+  }
+}
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -18,9 +29,17 @@ router.get('/recipes', function(req, res) {
   ];
   res.render('home/recipes', { recipes: recipes, message: req.flash() });
 });
-router.get('/reviews', function(req, res) {
-  res.render('home/reviews', { message: req.flash() });
+
+router.get('/reviews', authenticate, function(req, res, next) {
+  Comment.find({}).populate('user')
+  .then(function(comments) {
+    res.render('home/reviews', { message: req.flash(), comments: comments });
+  })
+  .catch(function(err) {
+    return next(err);
+  });
 });
+
 router.get('/login', function(req, res) {
   res.render('home/login', { message: req.flash() });
 });
