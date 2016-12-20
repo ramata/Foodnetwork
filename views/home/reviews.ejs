@@ -15,12 +15,27 @@
       <h3>Post your reviews of your favorite chefs or recipes here</h3>
 
   </main>
-  <ul>
+  <!-- <ul>
     <% comments.reverse().forEach(function(comment) { %>
       <li><p class ="comment"><%= comment.user ? comment.user.local.email : 'NA' %> - :<%= comment.text %></p>
       </li>
     <% }); %>
-  </ul>
+  </ul> -->
+  <div>
+  <h3>comments:</h3>
+  <% comments.reverse().forEach(function(comment) { %>
+    <h4>
+      <form method="POST" action="/comments/<%= comment._id %>?_method=DELETE">
+        <a href="/comments/<%= comment._id %>">
+      <%= comment.user.local.email %>:    <%= comment.text %>
+        </a>
+      
+        <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+      </form>
+    </h4>
+  <% }) %>
+</div>
+
 
 
 

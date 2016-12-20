@@ -102,18 +102,29 @@ router.put('/:id',  authenticate, function(req, res, next) {
 });
 
 // DESTROY
+// router.delete('/:id', authenticate, function(req, res, next) {
+//   var comment = currentUser.comments.id(req.params.id);
+//   if (!comment) return next(makeError(res, 'Document not found', 404));
+//   var index = currentUser.comments.indexOf(comment);
+//   currentUser.comments.splice(index, 1);
+//   currentUser.save()
+//   .then(function(saved) {
+//     res.redirect('/comments');
+//   }, function(err) {
+//     return next(err);
+//   });
+// });
+// DELETE
 router.delete('/:id', authenticate, function(req, res, next) {
-  var comment = currentUser.comments.id(req.params.id);
-  if (!comment) return next(makeError(res, 'Document not found', 404));
-  var index = currentUser.comments.indexOf(comment);
-  currentUser.comments.splice(index, 1);
-  currentUser.save()
-  .then(function(saved) {
-    res.redirect('/comments');
-  }, function(err) {
-    return next(err);
+  var comment = Comment.remove({_id: req.params.id }, function(err)
+{
+    if (err){  return next(err);}
+    else{
+      res.redirect('/reviews');
+    }
+  }
+);
   });
-});
 
 // TOGGLE completed
 router.get('/:id/toggle', authenticate, function(req, res, next) {

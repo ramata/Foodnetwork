@@ -20,7 +20,7 @@ router.get('/', function(req, res) {
 router.get('/about', function(req, res) {
   res.render('home/about', { message: req.flash() });
 });
-router.get('/recipes', function(req, res) {
+router.get('/recipes', authenticate,function(req, res) {
   // TODO: get the recipes from an API call or from MongoDB
   let recipes = [
     { title: "Recipe 1", url: "https://goo.gl/tJhTmV" },
